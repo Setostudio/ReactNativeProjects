@@ -14,7 +14,8 @@ import appColor from "../commonTheme";
 import screenNames from "../screens/screenNames";
 import SearchScreen from "../screens/SearchScreen";
 import CartScreen from "../screens/CartScreen";
-const InnerStack = createBottomTabNavigator(
+import ViewProductScreen from "../screens/ViewProductScreen";
+const TabStack = createBottomTabNavigator(
   {
     Home: HomeScreen,
     Search: SearchScreen,
@@ -50,4 +51,20 @@ const InnerStack = createBottomTabNavigator(
   }
 );
 
-export default createAppContainer(InnerStack);
+const OutterStack = createStackNavigator(
+  {
+    Tab: {
+      screen: TabStack
+    },
+    ViewProduct: {
+      screen: ViewProductScreen
+    },
+    Cart: {
+      screen: CartScreen
+    }
+  },
+  {
+    headerMode: "none"
+  }
+);
+export default createAppContainer(OutterStack);

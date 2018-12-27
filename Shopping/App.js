@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
 
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import AppNavigator from "./src/navigator";
-import AppText from "./src/components/AppText";
+
+import productReducer from "./src/reducers/productReducer";
+const store = createStore(productReducer, applyMiddleware(thunk));
 class App extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +14,11 @@ class App extends Component {
   }
 
   render() {
-    return <AppNavigator />;
+    return (
+      <Provider store={store}>
+        <AppNavigator />
+      </Provider>
+    );
   }
 }
 
